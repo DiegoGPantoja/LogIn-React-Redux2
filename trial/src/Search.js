@@ -1,8 +1,18 @@
 import { BiSearch, BiCaretDown, BiCheck } from "react-icons/bi";
+import { useState } from "react";
 
-const DropDown = () => {
+const DropDown = ({DropVisibility}) => {
   return (
-    <div
+    /*
+    DropVisibility is validated if it's true, then it's going to show all the div code
+    If it's not, then it's going to return null
+    next example works as follows: 
+    
+    if(!DropVisibility){
+      return null;
+    }
+    */
+    DropVisibility && <div
       className="origin-top-right absolute right-0 mt-2 w-56
       rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
     >
@@ -48,6 +58,7 @@ const DropDown = () => {
 };
 
 const Search = () => {
+  let[ DropVisibility, SetDropVisibility ] = useState(false)
   return (
     <div className="py-5">
       <div className="mt-1 relative rounded-md shadow-sm">
@@ -78,10 +89,13 @@ const Search = () => {
               id="options-menu"
               aria-haspopup="true"
               aria-expanded="true"
+              onClick={ () => SetDropVisibility(!DropVisibility)}
             >
               Sort By <BiCaretDown className="ml-2" />
             </button>
-            <DropDown />
+            <DropDown DropVisibility={DropVisibility}
+            // we're calling the DropDown constant, sending the DropVisibility value
+            />
           </div>
         </div>
       </div>

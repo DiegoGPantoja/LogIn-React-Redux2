@@ -5,7 +5,9 @@ const AddAppointment = () => {
   let [Visibility, SetVisibility] = useState(false)
   return (
     <div>
-      <button className="bg-blue-400 text-white px-2 py-3 w-full text-left rounded-t-md">
+      <button className="bg-blue-400 
+                        text-white px-2 py-3 w-full text-left rounded-t-md"
+              onClick={() => SetVisibility(!Visibility) }>
         <div>
           <BiCalendarPlus className="inline-block align-text-top" /> Add
           Appointment

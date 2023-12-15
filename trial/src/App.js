@@ -46,7 +46,10 @@ function App() {
         <BiCalendar className="inline-block text-red-400 align-top" />
         Your Appointments
       </h1>
-      <AddAppointment /> 
+      <AddAppointment 
+          onSendAppointment = {newAppointment => setAppointmentList([... AppointmentList, newAppointment])}
+          lastId = {AppointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id) : max, 0)}
+      /> 
       <Search 
         Input={Input}
         onInputChange={newInput => setInput(newInput)}

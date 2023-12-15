@@ -1,8 +1,30 @@
 import { BiCalendarPlus } from "react-icons/bi";
 import { useState } from 'react';
 
-const AddAppointment = () => {
+const AddAppointment = ({onSendAppointment, lastId}) => {
+  const clearData = {
+    ownername: '',
+    petName: '',
+    aptDate: '',
+    aptTime: '',
+    aptNotes: ''
+  }
   let [Visibility, SetVisibility] = useState(false)
+  let [newAppointment, setNewAppointment] = useState(clearData)
+
+  function AppointmentUpload() {
+    const AppointmentInfo = {
+        id: lastId + 1,
+        ownername: newAppointment.ownername,
+        petName: newAppointment.petName,
+        aptDate: newAppointment.aptDate + ' ' + newAppointment.aptTime,
+        aptNotes: newAppointment.aptNotes
+    }
+    onSendAppointment(AppointmentInfo);
+    setNewAppointment(clearData);
+    SetVisibility(!Visibility);
+  }
+
   return (
     <div>
       <button className="bg-blue-400 
@@ -28,6 +50,8 @@ const AddAppointment = () => {
               name="ownerName"
               id="ownerName"
               className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              value={newAppointment.ownerName}
+              onChange={(event) => {setNewAppointment({ ...newAppointment, ownerName: event.target.value})}}
             />
           </div>
         </div>
@@ -45,6 +69,8 @@ const AddAppointment = () => {
               name="petName"
               id="petName"
               className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              value={newAppointment.petName}
+              onChange={(event) => {setNewAppointment({ ...newAppointment, petName: event.target.value})}}
             />
           </div>
         </div>
@@ -62,6 +88,8 @@ const AddAppointment = () => {
               name="aptDate"
               id="aptDate"
               className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              value={newAppointment.Date}
+              onChange={(event) => {setNewAppointment({ ...newAppointment, Date: event.target.value})}}
             />
           </div>
         </div>
@@ -79,6 +107,8 @@ const AddAppointment = () => {
               name="aptTime"
               id="aptTime"
               className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              value={newAppointment.aptTime}
+              onChange={(event) => {setNewAppointment({ ...newAppointment, aptTime: event.target.value})}}
             />
           </div>
         </div>
@@ -97,6 +127,8 @@ const AddAppointment = () => {
               rows="3"
               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
               placeholder="Detailed comments about the condition"
+              value={newAppointment.aptNotes}
+              onChange={(event) => {setNewAppointment({ ...newAppointment, aptNotes: event.target.value})}}
             ></textarea>
           </div>
         </div>
@@ -106,6 +138,7 @@ const AddAppointment = () => {
             <button
               type="submit"
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+              onClick={AppointmentUpload}
             >
               Submit
             </button>

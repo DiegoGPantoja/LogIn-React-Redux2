@@ -39,9 +39,9 @@ const DropDown = ({DropVisibility, onSortByChange, onOrderByChange, sortBy, orde
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
           role="menuitem"
-          onClick = {() => onSortByChange('Date')}
+          onClick = {() => onSortByChange('aptDate')}
         >
-          Date { (sortBy === 'Date') && <BiCheck />}
+          Date { (sortBy === 'aptDate') && <BiCheck />}
         </div>
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer border-gray-1 border-t-2"

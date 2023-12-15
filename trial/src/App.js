@@ -47,7 +47,7 @@ function App() {
         Your Appointments
       </h1>
       <AddAppointment 
-          onSendAppointment = {newAppointment => setAppointmentList([... AppointmentList, newAppointment])}
+          onSendAppointment = {newAppointment => setAppointmentList([...AppointmentList, newAppointment])}
           lastId = {AppointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id) : max, 0)}
       /> 
       <Search 

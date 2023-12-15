@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const AddAppointment = ({onSendAppointment, lastId}) => {
   const clearData = {
-    ownername: '',
+    ownerName: '',
     petName: '',
     aptDate: '',
     aptTime: '',
@@ -15,7 +15,7 @@ const AddAppointment = ({onSendAppointment, lastId}) => {
   function AppointmentUpload() {
     const AppointmentInfo = {
         id: lastId + 1,
-        ownername: newAppointment.ownername,
+        ownerName: newAppointment.ownerName,
         petName: newAppointment.petName,
         aptDate: newAppointment.aptDate + ' ' + newAppointment.aptTime,
         aptNotes: newAppointment.aptNotes

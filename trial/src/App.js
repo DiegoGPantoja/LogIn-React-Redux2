@@ -9,6 +9,8 @@ function App() {
 
   let [AppointmentList, setAppointmentList] = useState([]);
   let [Input, setInput] = useState("");
+  let [sortBy, setSortBy] = useState("petName");
+  let [orderBy, setOrderBy] = useState("asc");
 
   const fetchData = useCallback(() => {
     fetch('./data.json')
@@ -31,7 +33,12 @@ function App() {
         item.aptNotes.toLowerCase().includes(Input.toLowerCase())
       )
     }
-  )
+  ).sort((a, b) => {
+    let order = (orderBy === 'asc') ? 1 : -1;
+    return(
+      a[sortBy].toLowerCase() < b[sortBy].toLowerCase()  ? -1 * order : 1 * order
+    )
+  })
 
   return (
     <div className="App container mx-auto mt-3 font-thin">
@@ -42,7 +49,11 @@ function App() {
       <AddAppointment /> 
       <Search 
         Input={Input}
-        onInputChange={myQuery => setInput(myQuery)}/>
+        onInputChange={newInput => setInput(newInput)}
+        orderBy = {orderBy}
+        onOrderByChange = {sort => setOrderBy(sort)}
+        sortBy = {sortBy}
+        onSortByChange = {sort => setSortBy(sort)}/>
 
       <ul className="divided-y divide-gray-200">
         {filteredAppointments.map((Appointment) => (

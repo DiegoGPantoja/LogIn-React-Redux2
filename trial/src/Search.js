@@ -1,7 +1,7 @@
 import { BiSearch, BiCaretDown, BiCheck } from "react-icons/bi";
 import { useState } from "react";
 
-const DropDown = ({DropVisibility}) => {
+const DropDown = ({DropVisibility, onSortByChange, onOrderByChange, sortBy, orderBy}) => {
   return (
     /*
     DropVisibility is validated if it's true, then it's going to show all the div code
@@ -25,39 +25,44 @@ const DropDown = ({DropVisibility}) => {
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
           role="menuitem"
+          onClick = {() => onSortByChange('petName')}
         >
-          Pet Name <BiCheck />
+          Pet Name { (sortBy === 'petName') && <BiCheck />}
         </div>
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
           role="menuitem"
+          onClick = {() => onSortByChange('ownerName')}
         >
-          Owner Name <BiCheck />
+          Owner Name { (sortBy === 'ownerName') && <BiCheck />}
         </div>
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
           role="menuitem"
+          onClick = {() => onSortByChange('Date')}
         >
-          Date <BiCheck />
+          Date { (sortBy === 'Date') && <BiCheck />}
         </div>
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer border-gray-1 border-t-2"
           role="menuitem"
+          onClick = {() => onOrderByChange('asc')}
         >
-          Asc <BiCheck />
+          Asc { (orderBy === 'asc') && <BiCheck />}
         </div>
         <div
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
           role="menuitem"
+          onClick = {() => onOrderByChange('desc')}
         >
-          Desc <BiCheck />
+          Desc { (orderBy === 'desc') && <BiCheck />}
         </div>
       </div>
     </div>
   );
 };
 
-const Search = ({Input, onInputChange}) => {
+const Search = ({Input, onInputChange, sortBy, onSortByChange, orderBy, onOrderByChange}) => {
   let[ DropVisibility, SetDropVisibility ] = useState(false)
   return (
     <div className="py-5">
@@ -94,7 +99,13 @@ const Search = ({Input, onInputChange}) => {
             >
               Sort By <BiCaretDown className="ml-2" />
             </button>
-            <DropDown DropVisibility={DropVisibility}
+            <DropDown 
+              DropVisibility={DropVisibility}
+              sortBy = {sortBy}
+              onSortByChange = {sort => onSortByChange(sort)}
+              orderBy = {orderBy}
+              onOrderByChange = {sort => onOrderByChange(sort)}
+
             // we're calling the DropDown constant, sending the DropVisibility value
             />
           </div>

@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback } from 'react'
 function App() {
 
   let [AppointmentList, setAppointmentList] = useState([]);
+  let [Input, setInput] = useState("");
 
   const fetchData = useCallback(() => {
     fetch('./data.json')
@@ -21,6 +22,17 @@ function App() {
     fetchData()
   }, [fetchData])
 
+
+  const filteredAppointments = AppointmentList.filter(
+    item => {
+      return (
+        item.petName.toLowerCase().includes(Input.toLowerCase()) ||
+        item.ownerName.toLowerCase().includes(Input.toLowerCase()) ||
+        item.aptNotes.toLowerCase().includes(Input.toLowerCase())
+      )
+    }
+  )
+
   return (
     <div className="App container mx-auto mt-3 font-thin">
       <h1 className="text-5xl mb-3">
@@ -28,10 +40,12 @@ function App() {
         Your Appointments
       </h1>
       <AddAppointment /> 
-      <Search />
+      <Search 
+        Input={Input}
+        onInputChange={myQuery => setInput(myQuery)}/>
 
       <ul className="divided-y divide-gray-200">
-        {AppointmentList.map((Appointment) => (
+        {filteredAppointments.map((Appointment) => (
           /*calling AppitmentList and map it to show every appointment from data.json
           * then set it up with the variable of Appointment
           */

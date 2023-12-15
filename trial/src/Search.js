@@ -57,7 +57,7 @@ const DropDown = ({DropVisibility}) => {
   );
 };
 
-const Search = () => {
+const Search = ({Input, onInputChange}) => {
   let[ DropVisibility, SetDropVisibility ] = useState(false)
   return (
     <div className="py-5">
@@ -70,12 +70,13 @@ const Search = () => {
           type="text"
           name="query"
           id="query"
-          value=""
+          value={Input}
           className="pl-8 rounded-md 
                      focus:ring-indigo-500 
                      focus:border-indigo-500 block w-full sm:text-sm 
                      border-gray-500"
           placeholder="Search"
+          onChange={(event) => {onInputChange(event.target.value)}}
         />
         <div className="absolute inset-y-0 right-0 flex items-center">
           <div>
